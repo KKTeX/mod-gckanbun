@@ -1,5 +1,7 @@
 \documentclass[luatex,fontsize=8pt,paper=b5]{jlreq}%
 \usepackage{hyperref}
+\usepackage{gkkanbun}
+\usepackage{luwa-ul}
 \usepackage{caption}
 \usepackage[most]{tcolorbox}
 \usepackage{fp}
@@ -50,7 +52,7 @@
 
 \colorlet{grayLight}{white!80!black} 
 
-\NewTCBListing{SourceCode}{ O{Input} m !o !O{DeepSkyBlue3} }{%
+\NewTCBListing{SourceCode}{ m m !o !O{DeepSkyBlue3} }{%
   enhanced, colback=black!70, colframe=Snow4,
   toptitle=-1mm, bottomtitle=-1mm,
   righttitle=-1mm, lefttitle=-1mm,
@@ -119,7 +121,7 @@ fonttitle=\ascb@gtfamily, IfValueTF={#1}{title=\hspace*{.1em}【#2】〈#1〉\hs
 
 \section{The Original License}
 
-\begin{simple}{The Original License}
+\begin{simple}[gckanbun package]{The Original License}
 \noindent This package is licensed under the terms of the MIT License. \bigskip
 
 \noindent Copyright (c) 2017-2021 Munehiro Yamamoto <munepixyz@gmail.com> \bigskip
@@ -129,5 +131,64 @@ fonttitle=\ascb@gtfamily, IfValueTF={#1}{title=\hspace*{.1em}【#2】〈#1〉\hs
 \noindent THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 \end{simple}
 
+\section{変更点}
+私は本パッケージを作成するにあたり、既存のgckanbunパッケージを以下を満たすように改変しました。（I modified the gckanbun package in order to meet the following requirements.）
+
+\begin{itemize}
+  \item[\seihou{1}] \hspace{1em}再読文字に対応するコマンドの提供。（Provide some command for repetitively read character.）
+  \item[\seihou{2}] \hspace{1em}横書き環境でも正しく動くようにする。（Enable it can be used in horizontal mode.）
+  \item[\seihou{3}] \hspace{1em}一レ点などの特別な返り点に対処するためのコマンドを提供する。（Provide commands for special kaeriten like ichi-re mark.）
+  \item[\seihou{4}] \hspace{1em}筆者の作成した（TeX Live にも収録されている）luwa-ul パッケージと併用し易い仕様にする。（To make it easier to use together with luwa-ul package which I made and added in TeX Live.）
+\end{itemize}
+
+\section{設置・依存性}
+\subsection{読み込み}
+適切な場所に\texttt{gkkanbun.sty}のファイルを設置し、\verb|\usepackage{gkkanbun}|とかけば読み込みは完了です。
+
+本パッケージでは、オリジナルの仕様を引き継ぐ形で、\namiKK{\texttt{\textbackslash \{luatexja\}}を事前に読み込んでおくことが必須}となるため注意が必要です。ただし、jlreqクラスを仕様する場合は内部的に読み込まれるため、再度読み込む必要はありません。
+
+\subsection{オプション}
+パッケージオプションは\verb|prefix=<prefix>|（デフォルト値：\verb|gkkanbun|）となっていて、\texttt{gkkanbun}パッケージが提供する3つのコマンド\verb|\gkkanbunruby|、\verb|\gkkanbunokurigana|、\verb|\gkkanbunkaeriten| をそれぞれ\verb|<prefix>ruby|、\verb|<prefix>okurigana|、\verb|<prefix>kaeriten| として提供します。このオプションにより、他のパッケージで提供されるルビ振りコマンド \verb|\ruby| との衝突を避けられます。
+
+\namiKK{以下の説明においては、\texttt{prefix}を空白として指定したものと仮定してコマンド名を表記しています。必要に応じて補って読んでください。}
+
+\section{各種コマンド}
+\subsection{概観}
+漢文組版において必要十分であるコマンドは、
+
+\begin{itemize}
+  \item 返り点
+  \item 振り仮名
+  \item 送り仮名
+  \item 再読振り仮名
+  \item 再読送り仮名
+  \item 一レ点、上レ点、甲レ点、天レ点
+  \item ハイフン
+\end{itemize}
+
+\noindent です。これらに対し、本パッケージでは、それぞれ
+
+\begin{itemize}
+  \item \verb|\kaeriten|、\verb|返り|
+  \item \verb|\furigana|、\verb|振り|
+  \item \verb|\okurigana|、\verb|送り|
+  \item \verb|\furigana|、\verb|振り|のオプショナル引数
+  \item \verb|\okurigana|、\verb|送り|のオプショナル引数
+  \item \verb|\IchiRe|、\verb|\JyouRe|、\verb|\KouRe|、\verb|\TenRe|
+  \item \verb|\KanHyphen|
+\end{itemize}
+
+\noindent が対応しています。
+
+このうち、\texttt{prefix}が適用されるのは\verb|\kaeriten|、\verb|\furigana|、\verb|\okurigana|のみであることに注意が必要です。
+
+\subsection{使用方法}
+
+\subsubsection{\textbackslash kaeriten、\textbackslash 返り}
+これらの２種類のコマンドは全く同一のコマンドです。
+
+\begin{SourceCode}{Input}{TeX}
+
+\end{SourceCode}
 
 \end{document}

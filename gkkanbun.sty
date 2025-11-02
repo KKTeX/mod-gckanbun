@@ -19,16 +19,16 @@
 \ProvidesPackage{gkkanbun}[2025/11/03, Version 1.0.4]
 
 %% declare package errors
-\def\gcknbn@error{\PackageError{gckanbun}}
-\def\gcknbn@warning{\PackageWarning{gckanbun}}
-\def\gcknbn@warningnoline{\PackageWarningNoLine{gckanbun}}
-\def\gcknbn@info{\PackageInfo{gckanbun}}
+\def\gcknbn@error{\PackageError{gkkanbun}}
+\def\gcknbn@warning{\PackageWarning{gkkanbun}}
+\def\gcknbn@warningnoline{\PackageWarningNoLine{gkkanbun}}
+\def\gcknbn@info{\PackageInfo{gkkanbun}}
 
 \RequirePackage{keyval}
 \DeclareOption*{\gcknbn@setkey}
 \def\gcknbn@setkey{\expandafter\@gcknbn@setkey\expandafter{\CurrentOption}}
 \def\@gcknbn@setkey{\setkeys{gcknbn}}
-\def\gcknbn@prefix{gckanbun}%%given <prefix> for each commands
+\def\gcknbn@prefix{gkkanbun}%%given <prefix> for each commands
 \define@key{gcknbn}{prefix}{\gdef\gcknbn@prefix{#1}}
 
 \ExecuteOptions{prefix}
@@ -290,5 +290,6 @@
 \NewDocumentCommand{\JyouRe}{}{上\!\!レ}
 \NewDocumentCommand{\KouRe}{}{甲\!レ}
 \NewDocumentCommand{\TenRe}{}{天\!レ}
+\NewDocumentCommand{\KanHyphen}{}\symbol{"2015}
 
 \endinput
