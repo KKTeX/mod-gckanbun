@@ -188,7 +188,24 @@ fonttitle=\ascb@gtfamily, IfValueTF={#1}{title=\hspace*{.1em}【#2】〈#1〉\hs
 これらの２種類のコマンドは全く同一のコマンドです。
 
 \begin{SourceCode}{Input}{TeX}
-
+  雖\返り{レ}\\
+  雖\返り{\IchiRe}
 \end{SourceCode}
+
+\begin{OutPut}{Output}
+  縦書きの場合：
+
+  \bigskip
+  \parbox<t>[c][1cm][c]{3cm}{%
+  雖\返り{レ}鬼\\
+  雖\返り{\IchiRe}鬼}
+
+  横書きの場合：
+
+  雖\返り{レ}鬼\\
+  雖\返り{\IchiRe}鬼
+\end{OutPut}
+
+のような出力になります。
 
 \end{document}

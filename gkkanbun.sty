@@ -286,10 +286,34 @@
 \expandafter\let\csname 送り\endcsname\gcknbn@okurigana
 \expandafter\let\csname 返り\endcsname\gcknbn@kaeriten
 
-\NewDocumentCommand{\IchiRe}{}{\!一\!\!\!\!レ}
-\NewDocumentCommand{\JyouRe}{}{上\!\!レ}
-\NewDocumentCommand{\KouRe}{}{甲\!レ}
-\NewDocumentCommand{\TenRe}{}{天\!レ}
-\NewDocumentCommand{\KanHyphen}{}\symbol{"2015}
+\NewDocumentCommand{\IchiRe}{}{%
+  \ifnum\ltjgetparameter{direction}=3%
+    \!一\!\!\!レ%
+  \else%
+    \raisebox{.7ex}{一}\llap{レ}%
+  \fi%
+  }
+\NewDocumentCommand{\JyouRe}{}{%
+  \ifnum\ltjgetparameter{direction}=3%
+    上\!レ%
+  \else%
+    \raisebox{1.7ex}{上}\llap{レ}%
+  \fi%
+  }
+\NewDocumentCommand{\KouRe}{}{%
+  \ifnum\ltjgetparameter{direction}=3%
+    甲\!レ%
+  \else%
+    \raisebox{1.9ex}{甲}\llap{レ}%
+  \fi%
+  }
+\NewDocumentCommand{\TenRe}{}{%
+  \ifnum\ltjgetparameter{direction}=3%
+    天\!レ%
+  \else%
+    \raisebox{1.9ex}{天}\llap{レ}%
+  \fi%
+  }
+\NewDocumentCommand{\KanHyphen}{}{\symbol{"2015}}
 
 \endinput
