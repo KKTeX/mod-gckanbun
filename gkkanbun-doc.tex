@@ -1,4 +1,4 @@
-\documentclass[luatex,fontsize=8pt,paper=b5]{jlreq}%
+\documentclass[luatex,fontsize=8pt,paper=b5,fleq]{jlreq}
 \usepackage{hyperref}
 \usepackage{gkkanbun}
 \usepackage{luwa-ul}
@@ -8,17 +8,6 @@
 \usepackage{lltjext}
 \usepackage{luatexja-ruby}
 \usepackage{KKsymbols}
-
-\usepackage{listings}
-\lstset{
-    basicstyle=\ttfamily\small,
-    keywordstyle=\color{blue},
-    commentstyle=\color{gray},
-    stringstyle=\color{red},
-    breaklines=true,
-    breakatwhitespace=false,  
-    columns=flexible           
-}
 
 % You can omit these font settings.
 \RequirePackage[no-math]{fontspec}
@@ -38,6 +27,17 @@
 \renewcommand{\gtfamily}{\gthira\gthiraj}
 \renewcommand{\mgfamily}{\mghira\mghiraj}
 %%%
+
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    breaklines=true,
+    breakatwhitespace=false,  
+    columns=flexible           
+}
 
 
 \usepackage{hyperref} 
@@ -205,25 +205,42 @@ fonttitle=\ascb@gtfamily, IfValueTF={#1}{title=\hspace*{.1em}【#2】〈#1〉\hs
 
 \verb|\furigana|、\verb|\振り|は同一、\verb|\okurigana|、\verb|\送り|は同一です。
 
-これらを使う際、ふりがなを複数の漢字にまたがって振る（所以などで生じるパターン）場合に限り、適宜全角スペースを補ってください。ただし、基本的には漢字ごとにルビを振るのが原則であるので、漢文特有の当て字が用いられるような場合にのみこのような調整が生じることになるでしょう。
-
 \begin{SourceCode}{Input}{TeX}
   \振り{雖}{いへど}\送り{モ}\\
-  \振り{所}{ゆ}\振り{\KanHyphen}{ゑ}\振り{以}{　ん}\\
+  \振り{所}{ゆ}\振り{\KanHyphen}{ゑ}\振り{以}{ん}\\
   \振り{猶}{な}[ごと]\送り{ホ}[キヲ]
 \end{SourceCode}
 
 \begin{OutPut}{Output}[横書き]
   \振り{雖}{いへど}\送り{モ}\\
-  \振り{所}{ゆ}\返り{二}\振り{\KanHyphen}{ゑ}\振り{以}{　ん}\\
+  \振り{所}{ゆ}\返り{二}\振り{\KanHyphen}{ゑ}\振り{以}{ん}\\
   \振り{猶}{な}[ごと]\送り{ホ}[キヲ]
 \end{OutPut}
 
+これらのコマンドにはスターオプションがありますが、これは振り仮名や送り仮名を\verb|\smash|に入れるか入れないかを変更するためのオプションです。通常の使用時はオプションなしで使います。
+
 \section{注意}
-本パッケージは、グループルビをとっても然るべき調整がなされないという仕様にしています。いずれ良案が思いつけば仕様を変更するかもしれませんが、現状グループルビを入れようとする場合には
-\verb|\振り{所\返り{二}\KanHyphen 以}{ゆゑん}\送り{ナリ}|というように「ルビを振りたいものの中に返り点などのコマンドが混在してしまい、ボックス全体の長さを確定させた後に送り仮名の開始位置を決定するのが困難である」という作成者の技術的な限界によるものです。
+このパッケージによって提供されるコマンドは、基本的に「局所的な横書きないし縦書き」に対する出力を保証しません。というのも局所的に縦書きにするためのコマンドである\verb|\tate|などの内部の環境と通常の縦書き環境の仕様は大きく異なるためです。
 
 
+\section{全体縦書き環境における出力例}
+
+\begin{SourceCode}{Input}{TeX}
+  \documentclass[luatex,fontsize=8pt,paper=b5,tate]{jlreq}
+  \usepackage{luwa-ul,gkkanbun,KKsymbols}
+
+  \begin{document}\LARGE
+  今夫\送り{レ}江戸\振り{者}{は}、世之所\送り{ノ}\返り{レ}称\送り{スル}名都\振り{大}{だい}\振り{邑}{いふ}{大きな都市}、冠蓋之所\返り{レ}集\送り{マル}\LineNumbering{\kakko{2}}[.5em]\dashKK{舟車之\振り{所}{ところ}\送り{ニシテ}\返り{レ}\振り{湊}{あつ}}\送り{　マル}、実\送り{ニ}\振り{為}{た}\送り{ル}\返り{二}天下之大都会\返り{一}也。
+  而\送り{レドモ}\LineNumbering{\ichimoji{C}}\nolinebreak\underLineKK{其地之為名、訪之於古、未之聞}。
+  豈\送り{二}非\送り{ズ}\返り{三}古今相\送り{ひ}去\送り{ルコト}\振り{日}{ひび}\送り{二}遠\送り{ク}、事之相\送り{ヒ}変\送り{ズルコト}愈多\送り{ク}、求\送り{ムルモ}\返り{二}其\送り{ノ}所\送り{ヲ}\返り{\IchiRe}欲\送り{スル}\返り{レ}聞\送り{カント}而不\送り{ルコト}可\送り{カラ}\返り{レ}得、亦\送り{タ}\振り{猶}{な}[ごと]\送り{ホ}[キヲ]\返り{二}今之於\送り{ケルガ}\返り{\IchiRe}古\送り{ニ}也。
+  \end{document}
+\end{SourceCode}
+
+\begin{OutPut}{Output}[縦書き]
+  \begin{center}
+    \includegraphics[width=.7\linewidth]{whole-vert-sample.pdf}
+  \end{center}
+\end{OutPut}
 
 
 \end{document}
