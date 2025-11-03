@@ -15,8 +15,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% 2025/11/04 
+% 再読返り点のボックスの取る幅を毎度リセットするように修正。
+
+
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{gkkanbun}[2025/11/03, Version 1.0.4]
+\ProvidesPackage{gkkanbun}[2025/11/04, Version 1.0.5]
 
 %% declare package errors
 \def\gcknbn@error{\PackageError{gkkanbun}}
@@ -77,6 +81,7 @@
 \newdimen\gcknbn@dima
 \DeclareDocumentCommand{\gcknbn@ruby}{ s m m O{\vphantom{羅} }}{%
   \gcknbn@adjust@yokotate@use%
+  \gcknbn@furigana@width@s\z@%
   \leavevmode% 
   \begingroup%
     \gcknbn@dima\f@size\p@\relax \divide\gcknbn@dima by \tw@%
@@ -145,6 +150,7 @@
 \DeclareDocumentCommand{\gcknbn@okurigana}{ s m O{\vphantom{羅}} }{%
   \nobreak\leavevmode%
   \gcknbn@adjust@yokotate@use%
+  \gcknbn@okurigana@width@s\z@%
   \begingroup%
     \gcknbn@dima\f@size\p@\relax \divide\gcknbn@dima by \tw@%
     \def\tiny{\@setfontsize\tiny{\gcknbn@dima}{\z@}}%
@@ -289,7 +295,7 @@
 
 \NewDocumentCommand{\IchiRe}{}{%
   \ifnum\ltjgetparameter{direction}=3%
-    \!一\!\!\!レ%
+    \!一\!\!\!\!レ%
   \else%
     \raisebox{.7ex}{一}\llap{レ}%
   \fi%
