@@ -81,7 +81,8 @@
 \newdimen\gcknbn@dima
 \DeclareDocumentCommand{\gcknbn@ruby}{ s m m O{\vphantom{羅} }}{%
   \gcknbn@adjust@yokotate@use%
-  \gcknbn@furigana@width@s\z@%
+  \global\gcknbn@furigana@width\z@%
+  \global\gcknbn@furigana@width@s\z@%
   \leavevmode% 
   \begingroup%
     \gcknbn@dima\f@size\p@\relax \divide\gcknbn@dima by \tw@%
@@ -150,7 +151,8 @@
 \DeclareDocumentCommand{\gcknbn@okurigana}{ s m O{\vphantom{羅}} }{%
   \nobreak\leavevmode%
   \gcknbn@adjust@yokotate@use%
-  \gcknbn@okurigana@width@s\z@%
+  \global\gcknbn@okurigana@width\z@%
+  \global\gcknbn@okurigana@width@s\z@%
   \begingroup%
     \gcknbn@dima\f@size\p@\relax \divide\gcknbn@dima by \tw@%
     \def\tiny{\@setfontsize\tiny{\gcknbn@dima}{\z@}}%
@@ -233,7 +235,7 @@
 %%訓点返り点
 \newcommand*\gcknbn@kaeriten{%
   \@ifnextchar-{\gcknbn@tateten@kaeriten@hh}{%
-  \@ifnextchar-{\gcknbn@tateten@kaeriten@zh}{%
+  \@ifnextchar‐{\gcknbn@tateten@kaeriten@zh}{%
     \gcknbn@@kaeriten}}}
 
 \newcommand*\gcknbn@@kaeriten[1]{%
@@ -268,7 +270,7 @@
 }
 
 \def\gcknbn@tateten@kaeriten@hh-{\gcknbn@@tateten@kaeriten}
-\def\gcknbn@tateten@kaeriten@zh-{\gcknbn@@tateten@kaeriten}
+\def\gcknbn@tateten@kaeriten@zh‐{\gcknbn@@tateten@kaeriten}
 \newcommand*\gcknbn@@tateten@kaeriten[1]{%
   \nobreak\leavevmode
   \begingroup
@@ -295,28 +297,28 @@
 
 \NewDocumentCommand{\IchiRe}{}{%
   \ifnum\ltjgetparameter{direction}=3%
-    \!一\!\!\!\!レ%
+    \hspace{-.5ex}一\hspace{-1.3ex}レ%
   \else%
     \raisebox{.7ex}{一}\llap{レ}%
   \fi%
   }
 \NewDocumentCommand{\JyouRe}{}{%
   \ifnum\ltjgetparameter{direction}=3%
-    上\!レ%
+    上\hspace{-.4ex}レ%
   \else%
     \raisebox{1.7ex}{上}\llap{レ}%
   \fi%
   }
 \NewDocumentCommand{\KouRe}{}{%
   \ifnum\ltjgetparameter{direction}=3%
-    甲\!レ%
+    甲\hspace{-.4ex}レ%
   \else%
     \raisebox{1.9ex}{甲}\llap{レ}%
   \fi%
   }
 \NewDocumentCommand{\TenRe}{}{%
   \ifnum\ltjgetparameter{direction}=3%
-    天\!レ%
+    天\hspace{-.4ex}レ%
   \else%
     \raisebox{1.9ex}{天}\llap{レ}%
   \fi%
