@@ -70,6 +70,7 @@
 %%  * グループルビ
 %%  * 漢文訓点に対するふりがな（モノルビ）
 \let\gcknbn@rubybox@text\relax
+\let\gcknbn@rubybox@text@s\relax
 \newdimen\gcknbn@rubybox@width
 \newdimen\gcknbn@furigana@width \gcknbn@furigana@width\z@
 \newdimen\gcknbn@furigana@width@s \gcknbn@furigana@width@s\z@
@@ -78,7 +79,7 @@
   \gcknbn@adjust@yokotate@use%
   \leavevmode% 
   \begingroup%
-    \gcknbn@dima\f@size\p@\relax \divide\gcknbn@dima by \tw@%
+    \gcknbn@dima\f@size\p@\relax \divide\gcknbn@dima by \tw@
     \def\tiny{\@setfontsize\tiny{\gcknbn@dima}{\z@}}%
     \setbox\z@=\hbox{#2}\setbox\@ne=\hbox{\tiny#3}%
     \setbox\tw@=\hbox{\tiny#4}%
@@ -108,7 +109,7 @@
       \ifdim\wd\z@>\wd\@ne\dimen\z@=\wd\z@\else\dimen\z@=\wd\@ne\fi%
       \penalty\@lowpenalty%
       \raisebox{\gcknbn@adjust@yokotate}{\hbox{%
-        \vbox{\hbox to \dimen\z@{\box\@ne\hss}%
+        \vbox{\hbox to \dimen\z@{\tiny\hfil\gcknbn@rubybox@text\hfil}%
           \nointerlineskip\hbox to \dimen\z@{\hfil\box\z@\hfil}%
           \nointerlineskip\hbox to \dimen\z@{\box\tw@\hss}%
           }}}%
@@ -129,7 +130,7 @@
       \ifdim\wd\z@>\wd\@ne\dimen\z@=\wd\z@\else\dimen\z@=\wd\@ne\fi%
       \penalty\@lowpenalty%
       \raisebox{\gcknbn@adjust@yokotate}{\smash{\hbox{%
-        \vbox{\hbox to \dimen\z@{\box\@ne\hss}%
+        \vbox{\hbox to \dimen\z@{\tiny\hfil\gcknbn@rubybox@text\hfil}%
           \nointerlineskip\hbox to \dimen\z@{\hfil\box\z@\hfil}%
           \nointerlineskip\hbox to \dimen\z@{\box\tw@\hss}%
           }}}}%
