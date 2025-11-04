@@ -1,6 +1,6 @@
-\documentclass[luatex,fontsize=8pt,paper=b5,fleq]{jlreq}
+\documentclass[luatex,fontsize=8pt,paper=b5,fleqn]{jlreq}
 \usepackage{hyperref}
-\usepackage{gkkanbun}
+\usepackage{kkkanbun}
 \usepackage{luwa-ul}
 \usepackage{caption}
 \usepackage[most]{tcolorbox}
@@ -106,8 +106,12 @@ underlay last={\draw[black,line width=#3pt](frame.north east) -- (frame.south ea
 fonttitle=\ascb@gtfamily, IfValueTF={#1}{title=\hspace*{.1em}【#2】〈#1〉\hspace*{.1em}}{title=\hspace*{.1em}【#2】\hspace*{.1em}},#4}
 \makeatother
 
-\title{\texttt{gkkanbun} Package Documentation}
-\author{Kosei Kawaguchi a.k.a. KKTeX}
+\title{\texttt{kkkanbun} Package Documentation}
+\author{%
+\parbox[r]{7cm}{%
+  Modified ver. : Kawaguchi a.k.a. KKTeX\\
+  Original ver. : Munehiro Yamamoto
+}}
 \date{Version 1.0.5 (2025/11/04)}
 
 
@@ -120,26 +124,33 @@ fonttitle=\ascb@gtfamily, IfValueTF={#1}{title=\hspace*{.1em}【#2】〈#1〉\hs
 \newpage
 
 \section{参考元のパッケージ}
-本パッケージはgckanbunパッケージの改変版です。オリジナルの作者様であるMunehiro Yamamotoさんが指定なさったライセンス、および著作権表記は本資料末に記載している通りであり、本パッケージもそれに準拠する形で配布・公開などを行います。
+本パッケージはgckanbunパッケージを、より日本における漢文組版において品質を担保できるように改変したものです。オリジナルの作者様である山本宗宏（Munehiro Yamamoto）さんとの協議により、gckanbunパッケージを従来通り読み込んだ場合に実質的にこのパッケージが読み込まれることになります。
+
+gckanbunはそのルビや返り点の制御構造において非常に優れていたため、大枠はオリジナルのそれを踏襲し、必要最低限の拡張及び変更にとどめています。また、gckanbunパッケージに関する山本さんの記事として、
+\begin{quotation}
+  \url{https://qiita.com/munepi/items/5e6ac49fa5c025123305}
+\end{quotation}
+\noindent もぜひご参照ください。
 
 \section{変更点}
-私は本パッケージを作成するにあたり、既存のgckanbunパッケージを以下を満たすように改変しました。（I modified the gckanbun package in order to meet the following requirements.）
+私は本パッケージを作成するにあたり、既存のgckanbunパッケージを以下を満たすように改変しました。
 
 \begin{itemize}
-  \item[\seihou{1}] \hspace{1em}再読文字に対応するコマンドの提供。（Provide some command for repetitively read character.）
-  \item[\seihou{2}] \hspace{1em}横書き環境でも正しく動くようにする。（Enable it can be used in horizontal mode.）
-  \item[\seihou{3}] \hspace{1em}一レ点などの特別な返り点に対処するためのコマンドを提供する。（Provide commands for special kaeriten like ichi-re mark.）
-  \item[\seihou{4}] \hspace{1em}筆者の作成した（TeX Live にも収録されている）luwa-ul パッケージと併用し易い仕様にする。（To make it easier to use together with luwa-ul package which I made and added in TeX Live.）
+  \item[\seihou{1}] \hspace{1em}再読文字に対応するコマンドの提供。
+  \item[\seihou{2}] \hspace{1em}横書き環境でも正しく動くようにする。
+  \item[\seihou{3}] \hspace{1em}一レ点などの特別な返り点に対処するためのコマンドを提供する。
+  \item[\seihou{4}] \hspace{1em}行間に対してルビの「大きさ」が反映されるように変更。（それに伴い、オリジナルで生じていた文字サイズ変更に伴うルビと本文の被りが生じる問題を解消。）
+  \item[\seihou{5}] \hspace{1em}筆者の作成した（TeX Live にも収録されている）luwa-ul パッケージと併用し易い仕様にする。
 \end{itemize}
 
 \section{設置・依存性}
 \subsection{読み込み}
-適切な場所に\texttt{gkkanbun.sty}のファイルを設置し、\verb|\usepackage{gkkanbun}|とかけば読み込みは完了です。
+適切な場所に\texttt{kkkanbun.sty}のファイルを設置し、\verb|\usepackage{kkkanbun}|とかけば読み込みは完了です。
 
-本パッケージでは、オリジナルの仕様を引き継ぐ形で、\namiKK{\texttt{\textbackslash \{luatexja\}}を事前に読み込んでおくことが必須}となるため注意が必要です。ただし、jlreqクラスを仕様する場合は内部的に読み込まれるため、再度読み込む必要はありません。
+本パッケージでは、オリジナルの仕様を引き継ぐ形で、\namiKK{\texttt{luatexja}を事前に読み込んでおくことが必須}となるため注意が必要です。ただし、jlreqクラスを仕様する場合は内部的に読み込まれるため、再度読み込む必要はありません。
 
 \subsection{オプション}
-パッケージオプションは\verb|prefix=<prefix>|（デフォルト値：\verb|gkkanbun|）となっていて、\texttt{gkkanbun}パッケージが提供する3つのコマンド\verb|\gkkanbunruby|、\verb|\gkkanbunokurigana|、\verb|\gkkanbunkaeriten| をそれぞれ\verb|<prefix>ruby|、\verb|<prefix>okurigana|、\verb|<prefix>kaeriten| として提供します。このオプションにより、他のパッケージで提供されるルビ振りコマンド \verb|\ruby| との衝突を避けられます。
+パッケージオプションは\verb|prefix=<prefix>|（デフォルト値：\verb|kkkanbun|）となっていて、\texttt{kkkanbun}パッケージが提供する3つのコマンド\verb|\kkkanbunruby|、\verb|\kkkanbunokurigana|、\verb|\kkkanbunkaeriten| をそれぞれ\verb|<prefix>ruby|、\verb|<prefix>okurigana|、\verb|<prefix>kaeriten| として提供します。このオプションにより、他のパッケージで提供されるルビ振りコマンド \verb|\ruby| との衝突を避けられます。
 
 \namiKK{以下の説明においては、\texttt{prefix}を空白として指定したものと仮定してコマンド名を表記しています。必要に応じて補って読んでください。}
 
@@ -218,7 +229,7 @@ fonttitle=\ascb@gtfamily, IfValueTF={#1}{title=\hspace*{.1em}【#2】〈#1〉\hs
 
 \begin{SourceCode}{Input}{TeX}
   \documentclass[luatex,fontsize=8pt,paper=b5,tate]{jlreq}
-  \usepackage{luwa-ul,gkkanbun,KKsymbols}
+  \usepackage{luwa-ul,kkkanbun,KKsymbols}
 
   \begin{document}\LARGE
   今夫\送り{レ}江戸\振り{者}{は}、世之所\送り{ノ}\返り{レ}称\送り{スル}名都\振り{大}{だい}\振り{邑}{いふ}{大きな都市}、冠蓋之所\返り{レ}集\送り{マル}\LineNumbering{\kakko{2}}[.5em]\dashKK{舟車之\振り{所}{ところ}\送り{ニシテ}\返り{レ}\振り{湊}{あつ}}\送り{　マル}、実\送り{ニ}\振り{為}{た}\送り{ル}\返り{二}天下之大都会\返り{一}也。
@@ -257,19 +268,19 @@ fonttitle=\ascb@gtfamily, IfValueTF={#1}{title=\hspace*{.1em}【#2】〈#1〉\hs
 \section{Source Code}
 \begin{lstlisting}
   \NeedsTeXFormat{LaTeX2e}
-  \ProvidesPackage{gkkanbun}[2025/11/04, Version 1.0.5]
+  \ProvidesPackage{kkkanbun}[2025/11/04, Version 1.0.5]
 
   %% declare package errors
-  \def\gcknbn@error{\PackageError{gkkanbun}}
-  \def\gcknbn@warning{\PackageWarning{gkkanbun}}
-  \def\gcknbn@warningnoline{\PackageWarningNoLine{gkkanbun}}
-  \def\gcknbn@info{\PackageInfo{gkkanbun}}
+  \def\gcknbn@error{\PackageError{kkkanbun}}
+  \def\gcknbn@warning{\PackageWarning{kkkanbun}}
+  \def\gcknbn@warningnoline{\PackageWarningNoLine{kkkanbun}}
+  \def\gcknbn@info{\PackageInfo{kkkanbun}}
 
   \RequirePackage{keyval}
   \DeclareOption*{\gcknbn@setkey}
   \def\gcknbn@setkey{\expandafter\@gcknbn@setkey\expandafter{\CurrentOption}}
   \def\@gcknbn@setkey{\setkeys{gcknbn}}
-  \def\gcknbn@prefix{gkkanbun}%%given <prefix> for each commands
+  \def\gcknbn@prefix{kkkanbun}%%given <prefix> for each commands
   \define@key{gcknbn}{prefix}{\gdef\gcknbn@prefix{#1}}
 
   \ExecuteOptions{prefix}
@@ -289,6 +300,17 @@ fonttitle=\ascb@gtfamily, IfValueTF={#1}{title=\hspace*{.1em}【#2】〈#1〉\hs
     \gcknbn@error{Package 'gckanbun' currently supports (u)pLaTeX and LuaLaTeX.}
   \fi\fi\fi
 
+  %% 縦書き判定
+  \newif\ifgcknbn@tdir \gcknbn@tdirfalse
+  \@ifundefined{iftdir}{\let\iftdir\iffalse}\relax
+  \ifluatex
+    \ifnum\ltjgetparameter{direction}=3%
+      \gcknbn@tdirtrue
+    \fi
+  \else\iftdir
+    \gcknbn@tdirtrue
+  \fi\fi
+
   \newcommand*\gcknbn@kanjiskip@fill{%
     \ifluatex
       \ltjsetparameter{kanjiskip=\fill}%
@@ -300,7 +322,7 @@ fonttitle=\ascb@gtfamily, IfValueTF={#1}{title=\hspace*{.1em}【#2】〈#1〉\hs
   \newlength{\gcknbn@adjust@yokotate}
 
   \NewDocumentCommand{\gcknbn@adjust@yokotate@use}{}{%
-    \ifnum\ltjgetparameter{direction}=3%
+    \ifgcknbn@tdir
       \setlength{\gcknbn@adjust@yokotate}{-1.75ex}%
     \else%
       \setlength{\gcknbn@adjust@yokotate}{-1.3ex}%
@@ -320,7 +342,7 @@ fonttitle=\ascb@gtfamily, IfValueTF={#1}{title=\hspace*{.1em}【#2】〈#1〉\hs
     \gcknbn@adjust@yokotate@use%
     \global\gcknbn@furigana@width\z@%
     \global\gcknbn@furigana@width@s\z@%
-    \leavevmode% 
+    \leavevmode%
     \begingroup%
       \gcknbn@dima\f@size\p@\relax \divide\gcknbn@dima by \tw@%
       \def\tiny{\@setfontsize\tiny{\gcknbn@dima}{\z@}}%

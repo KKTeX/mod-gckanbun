@@ -20,19 +20,19 @@
 
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{gkkanbun}[2025/11/04, Version 1.0.5]
+\ProvidesPackage{kkkanbun}[2025/11/04, Version 1.0.5]
 
 %% declare package errors
-\def\gcknbn@error{\PackageError{gkkanbun}}
-\def\gcknbn@warning{\PackageWarning{gkkanbun}}
-\def\gcknbn@warningnoline{\PackageWarningNoLine{gkkanbun}}
-\def\gcknbn@info{\PackageInfo{gkkanbun}}
+\def\gcknbn@error{\PackageError{kkkanbun}}
+\def\gcknbn@warning{\PackageWarning{kkkanbun}}
+\def\gcknbn@warningnoline{\PackageWarningNoLine{kkkanbun}}
+\def\gcknbn@info{\PackageInfo{kkkanbun}}
 
 \RequirePackage{keyval}
 \DeclareOption*{\gcknbn@setkey}
 \def\gcknbn@setkey{\expandafter\@gcknbn@setkey\expandafter{\CurrentOption}}
 \def\@gcknbn@setkey{\setkeys{gcknbn}}
-\def\gcknbn@prefix{gkkanbun}%%given <prefix> for each commands
+\def\gcknbn@prefix{kkkanbun}%%given <prefix> for each commands
 \define@key{gcknbn}{prefix}{\gdef\gcknbn@prefix{#1}}
 
 \ExecuteOptions{prefix}
@@ -53,14 +53,20 @@
 \fi\fi\fi
 
 %% 縦書き判定
-\newif\ifgcknbn@tdir \gcknbn@tdirfalse
-\@ifundefined{iftdir}{\let\iftdir\iffalse}\relax
+\newif\ifgcknbn@tdir
+\gcknbn@tdirfalse
+
+\@ifundefined{iftdir}{\let\iftdir\iffalse}{}%
+
 \ifluatex
-  \ifnum\ltjgetparameter{direction}=3%
+  \@ifundefined{ltjgetparameter}{}{%
+    \ifnum\ltjgetparameter{direction}=3 %
+      \gcknbn@tdirtrue
+    \fi
+  }%
+\else
+  \iftdir
     \gcknbn@tdirtrue
-  \fi
-\else\iftdir
-  \gcknbn@tdirtrue
 \fi\fi
 
 \newcommand*\gcknbn@kanjiskip@fill{%

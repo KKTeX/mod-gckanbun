@@ -1,4 +1,4 @@
-gkkanbun
+kkkanbun
 ================================================
 
 Version: 1.0.5
@@ -9,6 +9,8 @@ License: MIT
 Description:
 ------------
 This package, inspired by gckanbun, provides a comprehensive set of commands required for typesetting classical Chinese texts in Japanese style.
+
+Munehiro Yamamoto, the author of the original package (: gckanbun package), generously granted permission to release this as kkkanbun package.
 
 Dependencies:
 -------------
@@ -28,4 +30,4 @@ Modifications and extensions:
 -------------
 Copyright (c) 2025 Kosei Kawaguchi
 
-See gkkanbun-doc.pdf for usage examples.
+See kkkanbun-doc.pdf for usage examples.
