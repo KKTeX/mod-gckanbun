@@ -1,6 +1,6 @@
 \documentclass[luatex,fontsize=8pt,paper=b5,fleqn]{jlreq}
 \usepackage{hyperref}
-\usepackage{kkkanbun}
+\usepackage{gckanbun}
 \usepackage{luwa-ul}
 \usepackage{caption}
 \usepackage[most]{tcolorbox}
@@ -106,13 +106,13 @@ underlay last={\draw[black,line width=#3pt](frame.north east) -- (frame.south ea
 fonttitle=\ascb@gtfamily, IfValueTF={#1}{title=\hspace*{.1em}【#2】〈#1〉\hspace*{.1em}}{title=\hspace*{.1em}【#2】\hspace*{.1em}},#4}
 \makeatother
 
-\title{\texttt{kkkanbun} Package Documentation}
+\title{\texttt{gckanbun} Package Documentation (Reworked)}
 \author{%
 \parbox[r]{7cm}{%
   Modified ver. : Kawaguchi a.k.a. KKTeX\\
   Original ver. : Munehiro Yamamoto
 }}
-\date{Version 1.0.5 (2025/11/04)}
+\date{Version 2.0.0 (2025/11/04)}
 
 
 \begin{document}
@@ -145,12 +145,12 @@ gckanbunはそのルビや返り点の制御構造において非常に優れて
 
 \section{設置・依存性}
 \subsection{読み込み}
-適切な場所に\texttt{kkkanbun.sty}のファイルを設置し、\verb|\usepackage{kkkanbun}|とかけば読み込みは完了です。
+適切な場所に\texttt{gckanbun.sty}のファイルを設置し、\verb|\usepackage{gckanbun}|とかけば読み込みは完了です。
 
 本パッケージでは、オリジナルの仕様を引き継ぐ形で、\namiKK{\texttt{luatexja}を事前に読み込んでおくことが必須}となるため注意が必要です。ただし、jlreqクラスを仕様する場合は内部的に読み込まれるため、再度読み込む必要はありません。
 
 \subsection{オプション}
-パッケージオプションは\verb|prefix=<prefix>|（デフォルト値：\verb|kkkanbun|）となっていて、\texttt{kkkanbun}パッケージが提供する3つのコマンド\verb|\kkkanbunruby|、\verb|\kkkanbunokurigana|、\verb|\kkkanbunkaeriten| をそれぞれ\verb|<prefix>ruby|、\verb|<prefix>okurigana|、\verb|<prefix>kaeriten| として提供します。このオプションにより、他のパッケージで提供されるルビ振りコマンド \verb|\ruby| との衝突を避けられます。
+パッケージオプションは\verb|prefix=<prefix>|（デフォルト値：\verb|gckanbun|）となっていて、\texttt{gckanbun}パッケージが提供する3つのコマンド\verb|\gckanbunruby|、\verb|\gckanbunokurigana|、\verb|\gckanbunkaeriten| をそれぞれ\verb|<prefix>ruby|、\verb|<prefix>okurigana|、\verb|<prefix>kaeriten| として提供します。このオプションにより、他のパッケージで提供されるルビ振りコマンド \verb|\ruby| との衝突を避けられます。
 
 \namiKK{以下の説明においては、\texttt{prefix}を空白として指定したものと仮定してコマンド名を表記しています。必要に応じて補って読んでください。}
 
@@ -229,7 +229,7 @@ gckanbunはそのルビや返り点の制御構造において非常に優れて
 
 \begin{SourceCode}{Input}{TeX}
   \documentclass[luatex,fontsize=8pt,paper=b5,tate]{jlreq}
-  \usepackage{luwa-ul,kkkanbun,KKsymbols}
+  \usepackage{luwa-ul,gckanbun,KKsymbols}
 
   \begin{document}\LARGE
   今夫\送り{レ}江戸\振り{者}{は}、世之所\送り{ノ}\返り{レ}称\送り{スル}名都\振り{大}{だい}\振り{邑}{いふ}{大きな都市}、冠蓋之所\返り{レ}集\送り{マル}\LineNumbering{\kakko{2}}[.5em]\dashKK{舟車之\振り{所}{ところ}\送り{ニシテ}\返り{レ}\振り{湊}{あつ}}\送り{　マル}、実\送り{ニ}\振り{為}{た}\送り{ル}\返り{二}天下之大都会\返り{一}也。
@@ -261,26 +261,25 @@ gckanbunはそのルビや返り点の制御構造において非常に優れて
 
 \section{Version History}
 \begin{itemize}
-  \item \textbf{v1.0.4 (2025/11/03)} --- Initial public release.
-  \item \textbf{v1.0.5 (2025/11/04)} --- Fixed some bug related to \verb|\返り|.
+  \item \textbf{v2.0.0 (2025/11/04)} --- Initial public release as a reworked version.
 \end{itemize}
 
 \section{Source Code}
 \begin{lstlisting}
   \NeedsTeXFormat{LaTeX2e}
-  \ProvidesPackage{kkkanbun}[2025/11/04, Version 1.0.5]
+  \ProvidesPackage{gckanbun}[2025/11/04, Version 2.0.0]
 
   %% declare package errors
-  \def\gcknbn@error{\PackageError{kkkanbun}}
-  \def\gcknbn@warning{\PackageWarning{kkkanbun}}
-  \def\gcknbn@warningnoline{\PackageWarningNoLine{kkkanbun}}
-  \def\gcknbn@info{\PackageInfo{kkkanbun}}
+  \def\gcknbn@error{\PackageError{gckanbun}}
+  \def\gcknbn@warning{\PackageWarning{gckanbun}}
+  \def\gcknbn@warningnoline{\PackageWarningNoLine{gckanbun}}
+  \def\gcknbn@info{\PackageInfo{gckanbun}}
 
   \RequirePackage{keyval}
   \DeclareOption*{\gcknbn@setkey}
   \def\gcknbn@setkey{\expandafter\@gcknbn@setkey\expandafter{\CurrentOption}}
   \def\@gcknbn@setkey{\setkeys{gcknbn}}
-  \def\gcknbn@prefix{kkkanbun}%%given <prefix> for each commands
+  \def\gcknbn@prefix{gckanbun}%%given <prefix> for each commands
   \define@key{gcknbn}{prefix}{\gdef\gcknbn@prefix{#1}}
 
   \ExecuteOptions{prefix}

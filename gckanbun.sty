@@ -20,19 +20,19 @@
 
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{kkkanbun}[2025/11/04, Version 1.0.5]
+\ProvidesPackage{gckanbun}[2025/11/04, Version 2.0.0]
 
 %% declare package errors
-\def\gcknbn@error{\PackageError{kkkanbun}}
-\def\gcknbn@warning{\PackageWarning{kkkanbun}}
-\def\gcknbn@warningnoline{\PackageWarningNoLine{kkkanbun}}
-\def\gcknbn@info{\PackageInfo{kkkanbun}}
+\def\gcknbn@error{\PackageError{gckanbun}}
+\def\gcknbn@warning{\PackageWarning{gckanbun}}
+\def\gcknbn@warningnoline{\PackageWarningNoLine{gckanbun}}
+\def\gcknbn@info{\PackageInfo{gckanbun}}
 
 \RequirePackage{keyval}
 \DeclareOption*{\gcknbn@setkey}
 \def\gcknbn@setkey{\expandafter\@gcknbn@setkey\expandafter{\CurrentOption}}
 \def\@gcknbn@setkey{\setkeys{gcknbn}}
-\def\gcknbn@prefix{kkkanbun}%%given <prefix> for each commands
+\def\gcknbn@prefix{gckanbun}%%given <prefix> for each commands
 \define@key{gcknbn}{prefix}{\gdef\gcknbn@prefix{#1}}
 
 \ExecuteOptions{prefix}
