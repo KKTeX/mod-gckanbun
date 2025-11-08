@@ -568,6 +568,11 @@ fonttitle=\ascb@gtfamily, IfValueTF={#1}{title=\hspace*{.1em}【#2】〈#1〉\hs
       \gcknbn@kaeriten@okurigana@skip
     \fi\fi
   }
+  \def\gcknbn@kaeriten@kutoten@skip{%
+    \ifgcknbn@tdir%
+      \hspace*{-\gcknbn@kaeriten@width}%
+    \fi
+  }
   \def\gcknbn@okurigana@kutoten@skip{%
     \hspace*{-\gcknbn@okurigana@width}}
   \def\gcknbn@kaeriten@okurigana@skip{%
