@@ -171,11 +171,11 @@ fonttitle=\ascb@gtfamily, IfValueTF={#1}{title=\hspace*{.1em}【#2】〈#1〉\hs
 \noindent です。これらに対し、本パッケージでは、それぞれ
 
 \begin{itemize}
-  \item \verb|\kaeriten|、\verb|返り|
-  \item \verb|\furigana|、\verb|振り|
-  \item \verb|\okurigana|、\verb|送り|
-  \item \verb|\furigana|、\verb|振り|のオプショナル引数
-  \item \verb|\okurigana|、\verb|送り|のオプショナル引数
+  \item \verb|\kaeriten|、\verb|\返り|
+  \item \verb|\furigana|、\verb|\振り|
+  \item \verb|\okurigana|、\verb|\送り|
+  \item \verb|\furigana|、\verb|\振り|のオプショナル引数
+  \item \verb|\okurigana|、\verb|\送り|のオプショナル引数
   \item \verb|\IchiRe|、\verb|\JyouRe|、\verb|\KouRe|、\verb|\TenRe|
   \item \verb|\KanHyphen|
 \end{itemize}
@@ -226,6 +226,7 @@ fonttitle=\ascb@gtfamily, IfValueTF={#1}{title=\hspace*{.1em}【#2】〈#1〉\hs
 
 
 \section{全体縦書き環境における出力例}
+縦書き環境における出力は以下のようになります。漢詩でなければ、通常の文章と同様の打ち方で問題ありません。
 
 \begin{SourceCode}{Input}{TeX}
   \documentclass[luatex,fontsize=8pt,paper=b5,tate]{jlreq}
@@ -247,6 +248,58 @@ fonttitle=\ascb@gtfamily, IfValueTF={#1}{title=\hspace*{.1em}【#2】〈#1〉\hs
   \end{center}
 \end{OutPut}
 
+漢詩を打つ場合、少々工夫が必要です。もしかすると以降のアップデートでより漢詩を組みやすくするインターフェースを用意するかもしれません。
+
+\begin{SourceCode}{Input}{TeX}
+\documentclass[luatex,fontsize=8pt,paper=b5,tate]{jlreq}
+\usepackage{luwa-ul,KKsymbols}
+\usepackage{gckanbun}
+
+
+\begin{document}\Huge
+
+\makebox[8em][s]{%
+  \leavevmode\kern-0.25em\振り{春}{しゅん}\hfill%
+    \振り{眠}{みん}\hfill%
+    不\返り{レ}\hfill%
+    覚\送り{エ}\返り{レ}\hfill%
+    \振り{暁}{あかつき}\送り{ヲ}\kern-1.5em
+  }
+
+  \makebox[8em][s]{%
+    \振り{処}{しょ}\hfill%
+    \振り{処}{しょ}\hfill%
+    聞\送り{ク}\返り{二}\hfill%
+    \underLineKK{\振り{啼}{てい}\hfill%
+    \振り{鳥}{ちょう}\送り{ヲ}\返り{一}\kern-1em}%
+  }
+
+  \makebox[8em][s]{%
+    \振り{夜}{や}\hfill%
+    \振り{来}{らい}\hfill%
+    風\hfill%
+    雨\送り{ノ}\hfill%
+    声
+  }
+
+  \makebox[8em][s]{%
+    花\hfill%
+    \振り{落}{お}\送り{ツルコト}\hfill%
+    知\送り{ル}\hfill%
+    \振り{多}{た}\hfill%
+    \振り{少}{しょう}\kern-.25em
+  }
+
+  \end{document}
+\end{SourceCode}
+
+\begin{OutPut}{Output}[縦書き]
+  \begin{center}
+    \includegraphics[width=.7\linewidth]{kanshi-sample.pdf}
+  \end{center}
+\end{OutPut}
+
+本パッケージにおいてルビの大きさは一律.5emです。したがって、\verb|\makebox|をしようしたときに最初と最後の「漢字の」位置を揃えたいという場合には\verb|\kern|を使って適宜調整します。
 
 \section{ライセンス}
 本パッケージをMITライセンスで配布します。条件なども全て以下のライセンス表記に準拠します。
