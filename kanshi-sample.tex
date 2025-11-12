@@ -4,13 +4,13 @@
 
 
 \begin{document}\Huge
-\makeatletter
+
 \makebox[8em][t]{%
-  \leavevmode\kern-.25em\振り{春}{しゅん}\hfill%
+  \振り[intrusion=pre]{春}{しゅん}\hfill%
   \振り{眠}{みん}\hfill%
   不\返り{レ}\hfill%
-  覚\送り{エ}\返り{レ}\hfill%
-  \振り{暁}{あかつき}\送り{ヲ}\kern-\gcknbn@intr@post%%
+  \振り{覚}{おぼ}\送り{エ}\返り{レ}\hfill%
+  \振り{暁}{あかつき}\送り[intrusion=post]{ヲ}%
 }
 
 \makebox[8em][t]{%
@@ -18,23 +18,15 @@
   \振り{処}{しょ}\hfill%
   聞\送り{ク}\返り{二}\hfill%
   \underLineKK{\振り{啼}{てい}\hfill%
-  鳥\送り{ヲ}\返り{一}\kern-\gcknbn@intr@post}%
+  鳥\送り{ヲ}\返り[intrusion=post]{一}}%
 }
-
-% \makebox[8em][s]{%
-%   \振り{処}{しょ}\hfill%
-%   \振り{処}{しょ}\hfill%
-%   聞\送り{ク}\返り{二}\hfill%
-%   \underLineKK{\振り{啼}{てい}\hfill%
-%   鳥\送り{ヲ}\返り{一}\kern-.5em}%
-% }
 
 \makebox[8em][t]{%
   \振り{夜}{や}\hfill%
   \振り{来}{らい}\hfill%
   風\hfill%
   雨\送り{ノ}\hfill%
-  声
+  声%
 }
 
 \makebox[8em][t]{%
@@ -42,6 +34,7 @@
   \振り{落}{お}\送り{ツルコト}\hfill%
   知\送り{ル}\hfill%
   \振り{多}{た}\hfill%
-  \振り{少}{しょう}\kern-\gcknbn@intr@post%
+  \振り[intrusion=post]{少}{しょう}%
 }
+
 \end{document}
