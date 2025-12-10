@@ -18,8 +18,14 @@
 % 2025/11/08
 % 再読返り点の出力位置および\KanHyphenの仕様を変更。
 
+% 2025/12/10
+% kanjiskipが＼振りなどに対して入るように
+% 適切に\insertkanjiskip
+% グループルビは、ルビをかけたい部分全体に対して\熟語振りをかける仕様に。
+% \makeboxのsオプションでできるように。他の仕様は全部揃える。
+
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{gckanbun}[2025/11/12, Version 2.1.0]
+\ProvidesPackage{gckanbun}[2025/12/10, Version 2.2.0--undev]
 
 %% declare package errors
 \def\gcknbn@error{\PackageError{gckanbun}}
@@ -161,7 +167,7 @@
   \futurelet\@let@token\gcknbn@@furigana@okurigana@SMASH}
 
 \def\gcknbn@@furigana@okurigana{%
-    \ifx\@let@token\gcknbn@okurigana%
+    \ifx\@let@token\gcknbn@okurigana% 次が送り仮名の時
       \global\gcknbn@furigana@width=\wd\@ne\relax%
       \global\gcknbn@furigana@width@s=\wd\tw@\relax%
       \dimen\z@=\wd\z@%
@@ -170,7 +176,7 @@
           \nointerlineskip\hbox to \dimen\z@{\hfil\box\z@\hfil}%
           \nointerlineskip\hbox to \dimen\z@{\box\tw@\hss}%
           }}}%
-    \else
+    \else% 次が送り仮名ではない時
       \ifdim\wd\z@>\wd\@ne% \dimen\z@=max{\wd\z@,\wd\@ne,\wd\tw@}
         \dimen\z@=\wd\z@%
       \else%
@@ -346,9 +352,10 @@
 
 %%訓点返り点
 \newcommand*\gcknbn@kaeriten{%
-  \@ifnextchar-{\gcknbn@tateten@kaeriten@hh}{%
-  \@ifnextchar‐{\gcknbn@tateten@kaeriten@zh}{%
-    \gcknbn@@kaeriten}}}
+  % \@ifnextchar-{\gcknbn@tateten@kaeriten@hh}{%
+  % \@ifnextchar‐{\gcknbn@tateten@kaeriten@zh}{%
+    \gcknbn@@kaeriten}
+    % }}
 % \gcknbn@@kaeriten}
 
 % post,bothをとれるが挙動は一緒
@@ -409,20 +416,20 @@
   \fi
 }
 
-\def\gcknbn@tateten@kaeriten@hh-{\gcknbn@@tateten@kaeriten}
-\def\gcknbn@tateten@kaeriten@zh‐{\gcknbn@@tateten@kaeriten}
-\newcommand*\gcknbn@@tateten@kaeriten[1]{%
-  \nobreak\leavevmode
-  \begingroup
-    \gcknbn@dima\f@size\p@\relax \divide\gcknbn@dima by \tw@
-    \def\tiny{\@setfontsize\tiny{\gcknbn@dima}{\z@}}%
-    \setbox\z@=\hbox{\tiny\char"3190}%"
-    \global\gcknbn@kaeriten@width=\wd\z@\relax
-    \smash{\lower.35\zw\hbox{%
-    \vbox{\hbox to \gcknbn@kaeriten@width{\hfil\box\z@\hfil}%
-    \vspace*{-.1\zw}%
-    \nointerlineskip\hbox to \gcknbn@kaeriten@width{\tiny\hfil#1\hfil}}}}%
-  \endgroup}
+% \def\gcknbn@tateten@kaeriten@hh-{\gcknbn@@tateten@kaeriten}
+% \def\gcknbn@tateten@kaeriten@zh‐{\gcknbn@@tateten@kaeriten}
+% \newcommand*\gcknbn@@tateten@kaeriten[1]{%
+%   \nobreak\leavevmode
+%   \begingroup
+%     \gcknbn@dima\f@size\p@\relax \divide\gcknbn@dima by \tw@
+%     \def\tiny{\@setfontsize\tiny{\gcknbn@dima}{\z@}}%
+%     \setbox\z@=\hbox{\tiny\char"3190}%"
+%     \global\gcknbn@kaeriten@width=\wd\z@\relax
+%     \smash{\lower.35\zw\hbox{%
+%     \vbox{\hbox to \gcknbn@kaeriten@width{\hfil\box\z@\hfil}%
+%     \vspace*{-.1\zw}%
+%     \nointerlineskip\hbox to \gcknbn@kaeriten@width{\tiny\hfil#1\hfil}}}}%
+%   \endgroup}
 
 
 %% Finaly, provide \<prefix>ruby, \<prefix>okurigana, \<prefix>kaeriten
